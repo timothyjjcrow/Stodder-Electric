@@ -1,22 +1,3 @@
-// Electric cursor effect
-document.addEventListener("DOMContentLoaded", function () {
-  const electricCursor = document.createElement("div");
-  electricCursor.classList.add("electric-cursor");
-  document.body.appendChild(electricCursor);
-
-  // Create sparks
-  for (let i = 0; i < 5; i++) {
-    const spark = document.createElement("div");
-    spark.classList.add("spark");
-    electricCursor.appendChild(spark);
-  }
-
-  document.addEventListener("mousemove", (e) => {
-    electricCursor.style.left = e.clientX + "px";
-    electricCursor.style.top = e.clientY + "px";
-  });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   // Mobile Navigation Toggle
   const menuToggle = document.querySelector(".menu-toggle");
@@ -383,4 +364,285 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Initialize electric effects
+  createElectricSparks();
+  addElectricClickEffect();
+  addElectricTextEffect();
+  applyElectricPatterns();
 });
+
+// Create random electric sparks across the page - More subtle version
+function createElectricSparks() {
+  // Container for all sparks
+  const sparkContainer = document.createElement("div");
+  sparkContainer.className = "spark-container";
+  document.body.appendChild(sparkContainer);
+
+  // Create the sparks - less frequently (reduced from 30% to 15% chance)
+  setInterval(() => {
+    if (Math.random() > 0.85) {
+      // 15% chance of creating a spark
+      createSpark(sparkContainer);
+    }
+  }, 600); // Slower interval (was 300ms)
+}
+
+// Create a single spark - Improved aesthetics
+function createSpark(container) {
+  const spark = document.createElement("div");
+  spark.className = "electric-spark";
+
+  // Random position - keep closer to key sections
+  const keySection = document.querySelector(
+    "#services, #why-choose-us, #contact"
+  );
+  let x, y;
+
+  if (keySection && Math.random() > 0.5) {
+    // Position near a key section 50% of the time
+    const rect = keySection.getBoundingClientRect();
+    x = rect.left + Math.random() * rect.width;
+    y = rect.top + Math.random() * rect.height;
+
+    // Adjust for scroll
+    y += window.scrollY;
+  } else {
+    // Random position across the page
+    x = Math.random() * window.innerWidth;
+    y = Math.random() * (document.body.scrollHeight * 0.8); // Keep in top 80% of page
+  }
+
+  // Set spark properties - more subtle
+  spark.style.left = `${x}px`;
+  spark.style.top = `${y}px`;
+  spark.style.height = `${5 + Math.random() * 7}px`; // Varied height
+  spark.style.width = `${1}px`; // Thinner
+  spark.style.opacity = (0.2 + Math.random() * 0.4).toString(); // Less bright
+
+  // Add to container
+  container.appendChild(spark);
+
+  // Animate and remove - smoother animation
+  setTimeout(() => {
+    spark.style.transform = `translateY(${10 + Math.random() * 20}px)`;
+    spark.style.opacity = "0";
+
+    setTimeout(() => {
+      if (container.contains(spark)) {
+        container.removeChild(spark);
+      }
+    }, 800);
+  }, 50);
+}
+
+// Add electric "click" effect
+function addElectricClickEffect() {
+  document.addEventListener("click", function (e) {
+    // Create the circle element
+    const circle = document.createElement("div");
+    circle.className = "click-effect";
+    circle.style.position = "fixed";
+    circle.style.left = e.clientX + "px";
+    circle.style.top = e.clientY + "px";
+    circle.style.width = "5px";
+    circle.style.height = "5px";
+    circle.style.borderRadius = "50%";
+    circle.style.background =
+      "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(92,198,255,0.7) 40%, transparent 70%)";
+    circle.style.boxShadow =
+      "0 0 10px rgba(92,198,255,0.8), 0 0 20px rgba(0,140,255,0.5)";
+    circle.style.pointerEvents = "none";
+    circle.style.zIndex = "9999";
+    circle.style.transform = "translate(-50%, -50%) scale(0)";
+    circle.style.transition = "transform 0.5s, opacity 0.5s";
+
+    document.body.appendChild(circle);
+
+    // Animate the circle
+    setTimeout(() => {
+      circle.style.transform = "translate(-50%, -50%) scale(8)";
+      circle.style.opacity = "0";
+
+      setTimeout(() => {
+        document.body.removeChild(circle);
+      }, 500);
+    }, 10);
+  });
+}
+
+// Electric flicker effect for hero text - Less intense
+function addElectricTextEffect() {
+  const heroTexts = document.querySelectorAll(
+    ".hero-content h1, .hero-content h2"
+  );
+
+  heroTexts.forEach((text) => {
+    setInterval(() => {
+      if (Math.random() > 0.98) {
+        // 2% chance of flicker (was 3%)
+        text.style.opacity = "0.85"; // Less dramatic (was 0.7)
+        setTimeout(() => {
+          text.style.opacity = "1";
+        }, 80); // Shorter duration
+      }
+    }, 1000); // Less frequent (was 500ms)
+  });
+}
+
+// Apply electric pattern backgrounds to key sections - Enhanced
+function applyElectricPatterns() {
+  // Apply circuit pattern to services section
+  const servicesSection = document.querySelector("#services");
+  if (servicesSection) {
+    const patternDiv = document.createElement("div");
+    patternDiv.className = "pattern-overlay";
+    patternDiv.style.position = "absolute";
+    patternDiv.style.top = "0";
+    patternDiv.style.left = "0";
+    patternDiv.style.width = "100%";
+    patternDiv.style.height = "100%";
+    patternDiv.style.opacity = "0.05"; // Reduced opacity (was 0.07)
+    patternDiv.style.pointerEvents = "none";
+    patternDiv.style.background = "url(#circuit-pattern)";
+    patternDiv.style.zIndex = "0";
+
+    // Make the section position relative
+    servicesSection.style.position = "relative";
+    servicesSection.insertBefore(patternDiv, servicesSection.firstChild);
+  }
+
+  // Apply electric grid to safety commitment section
+  const safetySection = document.querySelector("#safety-commitment");
+  if (safetySection) {
+    const gridDiv = document.createElement("div");
+    gridDiv.className = "pattern-overlay";
+    gridDiv.style.position = "absolute";
+    gridDiv.style.top = "0";
+    gridDiv.style.left = "0";
+    gridDiv.style.width = "100%";
+    gridDiv.style.height = "100%";
+    gridDiv.style.opacity = "0.06"; // Reduced opacity (was 0.1)
+    gridDiv.style.pointerEvents = "none";
+    gridDiv.style.background = "url(#electric-grid)";
+    gridDiv.style.zIndex = "0";
+
+    safetySection.style.position = "relative";
+    safetySection.insertBefore(gridDiv, safetySection.firstChild);
+  }
+
+  // Add flowing electric currents
+  addFlowingCurrents();
+
+  // Create random lightning bolts - less frequently
+  setInterval(createRandomLightning, 15000); // Increased from 8000ms
+}
+
+// Add flowing electric current lines
+function addFlowingCurrents() {
+  // Add to why-choose-us section
+  const whyChooseUs = document.querySelector("#why-choose-us");
+
+  if (whyChooseUs) {
+    whyChooseUs.style.position = "relative";
+    whyChooseUs.style.overflow = "hidden";
+
+    // Create 3 currents
+    for (let i = 0; i < 3; i++) {
+      createCurrent(whyChooseUs);
+    }
+  }
+}
+
+// Create an animated electric current line
+function createCurrent(container) {
+  const current = document.createElement("div");
+  current.className = "electric-current";
+
+  // Random position and size
+  const y = 20 + Math.random() * (container.offsetHeight - 40);
+  const width = container.offsetWidth * 1.5;
+
+  current.style.position = "absolute";
+  current.style.top = `${y}px`;
+  current.style.left = "-50%";
+  current.style.width = `${width}px`;
+  current.style.opacity = "0";
+
+  container.appendChild(current);
+
+  // Animate
+  setTimeout(() => {
+    current.style.transition = "all 5s cubic-bezier(0.2, 0.8, 0.2, 1)";
+    current.style.opacity = "0.15"; // Reduced from 0.5
+    current.style.left = "100%";
+
+    // Remove after animation and create a new one
+    setTimeout(() => {
+      if (container.contains(current)) {
+        container.removeChild(current);
+        createCurrent(container);
+      }
+    }, 5000);
+  }, 100);
+}
+
+// Create a random animated lightning bolt - More refined
+function createRandomLightning() {
+  if (Math.random() > 0.7) {
+    // 30% chance (was 50%)
+    // Create the lightning element
+    const lightning = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    lightning.setAttribute("width", "40"); // Smaller (was 50)
+    lightning.setAttribute("height", "40"); // Smaller
+    lightning.setAttribute("viewBox", "0 0 32 32");
+    lightning.style.position = "fixed";
+    lightning.style.zIndex = "9998";
+    lightning.style.pointerEvents = "none";
+    lightning.style.opacity = "0.5"; // Reduced from 0.7
+    lightning.style.filter = "url(#electric-glow)";
+
+    // Position randomly but mostly in visible areas
+    const x = Math.random() * window.innerWidth;
+    lightning.style.left = `${x}px`;
+    lightning.style.top = "0px";
+
+    // Create the use element to reference the lightning bolt symbol
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttributeNS(
+      "http://www.w3.org/1999/xlink",
+      "xlink:href",
+      "#lightning-bolt"
+    );
+    lightning.appendChild(use);
+
+    // Add to body
+    document.body.appendChild(lightning);
+
+    // Animate down - faster animation
+    const animationDuration = 400 + Math.random() * 800; // 0.4 to 1.2 seconds (was 0.5 to 1.5)
+    lightning.animate(
+      [
+        { transform: "translateY(0) scale(1)", opacity: 0.5 }, // Reduced opacity
+        {
+          transform: `translateY(${window.innerHeight}px) scale(0.3)`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: animationDuration,
+        easing: "cubic-bezier(0.7, 0, 0.9, 0)", // Faster easing
+      }
+    );
+
+    // Remove after animation
+    setTimeout(() => {
+      if (document.body.contains(lightning)) {
+        document.body.removeChild(lightning);
+      }
+    }, animationDuration);
+  }
+}

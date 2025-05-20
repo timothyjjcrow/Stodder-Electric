@@ -27,6 +27,85 @@
     />
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="images/logo.png" type="image/png" />
+
+    <!-- SVG Electric Pattern Definitions -->
+    <svg width="0" height="0" style="position: absolute">
+      <defs>
+        <pattern
+          id="circuit-pattern"
+          patternUnits="userSpaceOnUse"
+          width="120"
+          height="120"
+        >
+          <!-- More elegant, thinner circuit lines -->
+          <path
+            d="M20 20 H50 V50 H80 V80 H50 V50"
+            fill="none"
+            stroke="#00a8ff"
+            stroke-width="0.7"
+            stroke-opacity="0.15"
+          />
+          <path
+            d="M70 40 H100 V70 H70"
+            fill="none"
+            stroke="#00a8ff"
+            stroke-width="0.7"
+            stroke-opacity="0.15"
+          />
+          <path
+            d="M10 90 H30 V110"
+            fill="none"
+            stroke="#00a8ff"
+            stroke-width="0.7"
+            stroke-opacity="0.15"
+          />
+          <!-- Subtle connection points -->
+          <circle cx="50" cy="50" r="1.5" fill="#00a8ff" fill-opacity="0.2" />
+          <circle cx="80" cy="80" r="1.5" fill="#00a8ff" fill-opacity="0.2" />
+          <circle cx="70" cy="40" r="1.5" fill="#00a8ff" fill-opacity="0.2" />
+        </pattern>
+
+        <pattern
+          id="electric-grid"
+          patternUnits="userSpaceOnUse"
+          width="60"
+          height="60"
+        >
+          <rect width="60" height="60" fill="none" />
+          <!-- More subtle grid lines -->
+          <path
+            d="M0 30 H60 M30 0 V60"
+            stroke="#00a8ff"
+            stroke-width="0.4"
+            stroke-opacity="0.08"
+          />
+          <circle cx="30" cy="30" r="1" fill="#00a8ff" fill-opacity="0.15" />
+        </pattern>
+
+        <filter id="electric-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <!-- Softer glow effect -->
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0.6  0 0 1 0 1  0 0 0 0.7 0"
+            result="glow"
+          />
+          <feBlend in="SourceGraphic" in2="glow" mode="normal" />
+        </filter>
+
+        <!-- More elegant lightning bolt symbol -->
+        <symbol id="lightning-bolt" viewBox="0 0 32 32">
+          <path
+            d="M17 13 L24 4 L12 13 L15 18 L8 28 L20 19 L17 13"
+            stroke="#00a8ff"
+            stroke-width="0.7"
+            fill="#00a8ff"
+            fill-opacity="0.7"
+          />
+        </symbol>
+      </defs>
+    </svg>
   </head>
   <body id="top">
     <header class="header">
@@ -79,7 +158,7 @@
         <div class="hero-content">
           <h1 class="animate-on-scroll">Empowering Homes & Businesses</h1>
           <h2 class="animate-on-scroll">
-            Your Trusted Electrical Partner in Eureka, CA
+            Your Trusted Electrical Partner in Humboldt County, CA
           </h2>
           <div class="cta-buttons animate-on-scroll">
             <a href="#services" class="btn btn-primary">Explore Our Services</a>
@@ -97,12 +176,12 @@
             <h2>Welcome to <span>Stodder Electric</span></h2>
             <p>
               Your trusted partner for diverse and professional electrical
-              services in Eureka, California, and the surrounding Humboldt
-              County. We are committed to providing a wide range of solutions to
-              meet the unique needs of various clientele. Whether you're a
-              homeowner in need of installations, a business requiring repairs,
-              or seeking expert advice through consultations, Stodder Electric
-              is here to deliver reliable and tailored services.
+              services in Humboldt County, California, and the surrounding
+              Humboldt County. We are committed to providing a wide range of
+              solutions to meet the unique needs of various clientele. Whether
+              you're a homeowner in need of installations, a business requiring
+              repairs, or seeking expert advice through consultations, Stodder
+              Electric is here to deliver reliable and tailored services.
             </p>
             <p>
               Our commitment to safety, quality, and customer satisfaction
@@ -923,6 +1002,21 @@
         </div>
       </div>
     </footer>
+
+    <!-- Before the closing body tag, add the electric bolt SVG for animations -->
+    <svg id="electric-bolt" style="display: none" width="0" height="0">
+      <defs>
+        <symbol id="lightning-bolt" viewBox="0 0 32 32">
+          <path
+            d="M17 13 L24 4 L12 13 L15 18 L8 28 L20 19 L17 13"
+            stroke="#00a8ff"
+            stroke-width="0.7"
+            fill="#00a8ff"
+            fill-opacity="0.7"
+          />
+        </symbol>
+      </defs>
+    </svg>
 
     <script src="script.js"></script>
   </body>
