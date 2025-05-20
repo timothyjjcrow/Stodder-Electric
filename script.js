@@ -1,3 +1,22 @@
+// Electric cursor effect
+document.addEventListener("DOMContentLoaded", function () {
+  const electricCursor = document.createElement("div");
+  electricCursor.classList.add("electric-cursor");
+  document.body.appendChild(electricCursor);
+
+  // Create sparks
+  for (let i = 0; i < 5; i++) {
+    const spark = document.createElement("div");
+    spark.classList.add("spark");
+    electricCursor.appendChild(spark);
+  }
+
+  document.addEventListener("mousemove", (e) => {
+    electricCursor.style.left = e.clientX + "px";
+    electricCursor.style.top = e.clientY + "px";
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // Mobile Navigation Toggle
   const menuToggle = document.querySelector(".menu-toggle");
