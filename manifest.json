@@ -1,0 +1,21 @@
+{
+  "name": "Stodder Electric",
+  "short_name": "Stodder",
+  "description": "Your trusted electrical contractor in Eureka, CA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0077b6",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

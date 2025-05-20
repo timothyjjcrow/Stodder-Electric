@@ -1,0 +1,17 @@
+# Ignore all files in images directory
+images/*
+
+# But keep the directory structure with .gitkeep
+!images/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln 
