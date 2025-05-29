@@ -511,10 +511,72 @@ header.scrolled {
   color: var(--primary-color);
 }
 
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
 .about-image img {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Mobile responsiveness for about section */
+@media (max-width: 1024px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-text {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .about-text .section-header {
+    text-align: center;
+  }
+
+  .about-text .section-header h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .about-image {
+    order: -1; /* Move image above text on mobile */
+    padding: 1rem;
+  }
+
+  .about-image img {
+    max-width: 300px;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-image img {
+    max-width: 250px;
+    padding: 1rem;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }
 
 /* =============== TESTIMONIALS SECTION =============== */
@@ -792,17 +854,6 @@ footer {
 }
 
 /* =============== RESPONSIVE DESIGN =============== */
-@media (max-width: 1024px) {
-  .about-content,
-  .safety-content {
-    grid-template-columns: 1fr;
-  }
-
-  .about-text {
-    padding-right: 0;
-  }
-}
-
 @media (max-width: 992px) {
   .main-nav {
     position: fixed;
@@ -1074,6 +1125,14 @@ footer {
   margin-right: 0.75rem;
   margin-top: 4px;
   font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.safety-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .safety-image img {
@@ -1081,8 +1140,82 @@ footer {
   box-shadow: var(--shadow);
   max-height: 450px;
   width: 100%;
+  max-width: 500px;
+  height: auto;
   object-fit: cover;
   border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.safety-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Mobile responsiveness for safety section */
+@media (max-width: 1024px) {
+  .safety-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .safety-text .section-header {
+    text-align: center;
+  }
+
+  .safety-text .section-header h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .safety-image {
+    order: -1; /* Move image above text on mobile */
+    padding: 0.5rem;
+  }
+
+  .safety-image img {
+    max-height: 350px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .safety-text ul li {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .safety-text ul li i {
+    margin-top: 2px;
+    font-size: 1.1rem;
+  }
+
+  .safety-image img {
+    max-height: 300px;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .safety-content {
+    gap: 1.5rem;
+  }
+
+  .safety-text ul li {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .safety-text ul li i {
+    margin-right: 0.5rem;
+    margin-top: 3px;
+  }
+
+  .safety-image img {
+    max-height: 250px;
+    max-width: 300px;
+  }
 }
 
 /* =============== SERVICE AREA SECTION =============== */
