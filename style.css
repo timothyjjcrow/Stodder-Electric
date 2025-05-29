@@ -1856,35 +1856,21 @@ h2 {
   }
 }
 
-/* Contact Form Submit Button Electric Effect */
+/* Contact Form Submit Button - Clean Effect */
 .contact-form button[type="submit"] {
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.contact-form button[type="submit"]::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(92, 198, 255, 0.4) 25%,
-    transparent 70%
-  );
-  opacity: 0;
-  transform: scale(0.5);
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  pointer-events: none;
+.contact-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
 }
 
-.contact-form button[type="submit"]:hover::before {
-  opacity: 0.8;
-  transform: scale(1);
-  animation: electricSpark 2s ease;
+.contact-form button[type="submit"]:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 /* Gallery Instagram CTA */
